@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: Documentation</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><h3>Overview</h3><p>React is structured into small, modular units called components.  It's 
+a new design approach which has benefits over traditional object-oriented
+programming in today's world of micro-services and cloud computing.</p>
+<h3>Key Concepts of React</h3><p>There are a few key concepts to understand about react:</p>
+<ul>
+<li>JavaScript and HTML are combined into a single file with extension 'jsx'.</li>
+<li>Every React component has a &quot;render&quot; method that is expected to be included</li>
+<li>The React framework handles the re-rendering of components based on something they call &quot;state&quot;</li>
+</ul>
+<h3>Embedded Components</h3><p>In React, we can break apart our application into small, lightweight, components
+that typically are organized based on the user-interface control hierarchy.
+For instance, The MenuBar component is one that we have built and placed 
+in our &quot;components&quot; folder.  Therefore, we can import any &quot;exported&quot; class 
+from the index.jsx file within that folder.</p>
+<p>To render one of the included components on the screen, you have to add an HTML 
+tag with the name of that component (as defined by the import statement above), 
+like so: </p>
+<MenuBar/>
+
+<h3>State</h3><p>Unlike traditional user-interface development, the values that are displayed on the screen
+are not updated directly by changing a variable or property.  </p>
+<p>There is nothing wrong with this approach, but when the application gets large it can be 
+difficult to manage all of the different things that have to change frequently on the screen
+based on certain events.  If you have an event that occurs in five different places of an
+application, and the result of that event is for the header of every page to update it's 
+text value - then you need to manually change the headers in five different places of your code.
+Alternatively, you have to build a small library that updates the text, and reference that 
+library in each of the five places.</p>
+<p>React introdues something called &quot;state&quot;.  Basically, what this means is that each component
+(or UI object) manages it's own properties and values.  And instead of you physically updating
+those values, you define the conditions by which they will change &quot;state&quot;.  Then all you have to do
+is trigger those conditions, and each of the objects will automatically update their own state; thus
+changing their values.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// Traditional method of changing a value
+var page = new Page();
+var header = new Header();
+header.text = "Header Text";
+page.setHeader(header);
+header.text = "Updated Header Text";</code></pre>
+
+    <pre class="prettyprint"><code>// React method of changing a value
+class Header {
+  constructor () {
+    this.state = {
+      color: 'blue',
+      change: false
+    }
+  }
+  return (
+    if(change === true) {
+      this.changeColor();
+      this.setState({ change: false });
+    }
+    render (
+      {this.state.color}
+    )
+  )
+  changeColor() {
+    this.setState({ color: 'red' })
+  }
+}</code></pre>
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Documentation.html">Documentation</a></li></ul><h3>Externals</h3><ul><li><a href="App.external_css.html">css</a></li></ul><h3>Classes</h3><ul><li><a href="App.html">App</a></li></ul><h3>Global</h3><ul><li><a href="global.html#MenuBar">MenuBar</a></li><li><a href="global.html#NavMenu">NavMenu</a></li><li><a href="global.html#PivitNav">PivitNav</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Aug 26 2018 20:41:20 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

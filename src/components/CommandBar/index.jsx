@@ -1,49 +1,37 @@
 import React, { PropTypes as T } from 'react';
 import { CommandBar, ICommandBarProps } from 'office-ui-fabric-react';
 import { CommandBarButton, IButtonProps } from 'office-ui-fabric-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
 
-class MenuBar extends React.Component {
-    constructor(props) {
+const mapStateToProps = (state, ownProps) => (
+    state
+)
+
+const mapDispatchToProps = function (dispatch) {
+    return (bindActionCreators(actions, dispatch));
+}
+
+export class MenuBar extends React.Component {
+    constructor(props, ICommandBarProps) {
         super(props);
-        this.state = {
+        this.props.initMenu();
 
-        };
     }
     render() {
         var that = this;
+        const { items, overflowItems, farItems } = this.props;
         return (
             <CommandBar
+            iconOnly={this.props.components.menu.iconOnly}
                 items={
                     [{
                     key: 'new',
                     name: 'New',
                     iconProps: { iconName: 'Add' },
-                    subMenuProps: {
-                        items: [{
-                            key: 'object',
-                            name: 'Object',
-                            onClick: function() {
-                                //that.props.showPanel('Object');
-                            }
-                        }, {
-                            key: 'action',
-                            name: 'Action',
-                            onClick: function() {
-                                //that.props.showPanel('Action');
-                            }
-                        }, {
-                            key: 'attribute',
-                            name: 'Attribute',
-                            onClick: function() {
-                                //that.props.showPanel('Attribute');
-                            }
-                        }, {
-                            key: 'group',
-                            name: 'Group'
-                        }, {
-                            key: 'resource',
-                            name: 'Resource'
-                        }]
+                    onClick: function() {
+                        that.props.showPanel(that.props.components.pivot.selected, "Add");
                     }
                 },
                 {
@@ -57,55 +45,63 @@ class MenuBar extends React.Component {
                     iconProps: { iconName: 'Delete' }
                 }]
             }
-                overflowItems={this.overflowData}
-                farItems={
-                    [
-                        {
-                            key: 'charts',
-                            name: 'Select Chart',
-                            iconProps: { iconName: 'BarChart4' },
-                            subMenuProps: {
-                                items: [{
-                                    key: 'treemap',
-                                    name: 'Treemap',
-                                    onClick: function() {
-                                        //that.props.toggleTreemap();   
-                                    }
-                                }
-                                , {
-                                    key: 'sunburst',
-                                    name: 'Sunburst',
-                                    onClick: function() {
-                                        //that.props.toggleSunburst();                                        
-                                    }
-                                
-                                },{
-                                    key: 'tree',
-                                    name: 'Tree',
-                                    onClick: function() {
-                                        //that.props.toggleTree();                                        
-                                    }
-                                
-                                },{
-                                    key: 'InvertedSunburst',
-                                    name: 'Inverted Sunburst',
-                                    onClick: function() {
-                                        //that.props.toggleInvertedSunburst();                                        
-                                    }
-                                
-                                },{
-                                    key: 'AlternateTreemap',
-                                    name: 'Alternate Treemap',
-                                    onClick: function() {
-                                        //that.props.toggleAltTreemap();                                        
-                                    }
-                                
-                                }]
-                            }
+                overflowItems={[
+                    {
+                        key: 'move',
+                        name: 'Move to...',
+                        iconProps: {
+                            iconName: 'MoveToFolder'
                         }
-                    ]
-                }
+                    },
+                    {
+                        key: 'copy',
+                        name: 'Copy to...',
+                        iconProps: {
+                            iconName: 'Copy'
+                        }
+                    },
+                    {
+                        key: 'rename',
+                        name: 'Rename...',
+                        iconProps: {
+                            iconName: 'Edit'
+                        }
+                    }
+                ]}
+                farItems={[
+                    {
+                        key: 'sort',
+                        name: 'Sort',
+                        iconProps: {
+                            iconName: 'SortLines'
+                        },
+                        onClick: function () { return console.log('Sort'); }
+                    },
+                    {
+                        key: 'tile',
+                        name: 'Grid view',
+                        iconProps: {
+                            iconName: 'Tiles'
+                        },
+                        iconOnly: true,
+                        onClick: function () { return console.log('Tiles'); }
+                    },
+                    {
+                        key: 'info',
+                        name: 'Info',
+                        iconProps: {
+                            iconName: 'Info'
+                        },
+                        iconOnly: true,
+                        onClick: function () { return console.log('Info'); }
+                    }
+                ]}
             />
         )
     }
 }
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MenuBar)

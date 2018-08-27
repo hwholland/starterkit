@@ -1,23 +1,32 @@
 import React, {
   Component
 } from 'react';
+// Redux framework imports
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from './actions';
+/**
+ * In order to import everything from a file, without assigning the contents to a variable, just use a plain
+ * import statement as shown here for the App.css file.
+ * 
+ * @external App.css
+ * @memberof App
+ */
 import './App.css';
-import { CommandBar } from 'office-ui-fabric-react';
+// Custom component imports
+import PivotNav from './components/Pivot';          /** @member PivitNav @memberof App */
+import NavMenu from './components/Nav';         /** @member NavMenu @memberof App */
+import SidePanel from './components/Panel';     /** @member SidePanel @memberof App */
+// Microsoft Fabric framework imports
+import { initializeIcons } from '@uifabric/icons';
+initializeIcons();
 
 /**
- * ### Overview 
- * This class serves as the center-point for an application's code-base.
- * React is structured into small, modular units called components.  It's 
- * a new design approach which has benefits over traditional object-oriented
- * programming in today's world of micro-services and cloud computing.
- * 
- * ### Key Concepts of React
- * There are a few key concepts to understand about react:
- * * JavaScript and HTML are combined into a single file with extension 'jsx'.
- * * Every React component has a "render" method that is expected to be included
- * * The React framework handles the re-rendering of components based on something they call "state"
+ * This class serves as the center-point for an application's code-base.  Anything that will be rendered
+ * on the screen will be first included here, and added to the render() method using the HTML tag notation.
  * 
  * @class App
+ * @extends Component
  */
 class App extends Component {
 
@@ -25,10 +34,12 @@ class App extends Component {
     super(props);
 
     /**
-     * State is an optional object defined as a property of a React component.  
-     * The State contains the variables you will reference in your jsx code.
-     * In order to let the React framework handle the re-rendering correctly, you never change state properties directly, but through a method called setState() which is part of the base component that every React class extends
-     * 
+     * State is an optional object defined as a property of a React component.  The State contains the variables 
+     * you will reference in your jsx code. In order to let the React framework handle the re-rendering correctly,
+     * you never change state properties directly, but through a method called setState() which is part of the base 
+     * component that every React class extends.
+     
+     * @namespace
      * @member state
      * @memberof App
      */
@@ -44,21 +55,33 @@ class App extends Component {
    * either manually defined in a .css file, or imported via a node module.
    * 
    * @method render
-   * @memberof App   * 
+   * @memberof App 
    */
   render() {
     return (
-      
+
       <div className="App">
-        <div id="content-header" class="ms-bgColor-themePrimary App-header">
-          <div class="padding">
-            <span class="ms-font-su ms-fontColor-white">Header Section</span>
-          </div>
+        
+        <div className="ms-textAlignLeft">
+          <PivotNav />
+          <SidePanel />
         </div>
+
       </div>
-      
+
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => (
+  state
+)
+
+const mapDispatchToProps = function (dispatch) {
+  return (bindActionCreators(actions, dispatch));
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
